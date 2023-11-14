@@ -170,22 +170,23 @@ Logic gates for use with https://www.nand2tetris.org/ hardware simulator:
     Add8(a=in, b[0]=true, out=out);
 
 <b>ALU</b>
-Mux16(a=x,b=false,sel=zx,out=xz);
-Mux16(a=y,b=false,sel=zy,out=yz);
-Not16(in=xz,out=negXz);
-Mux16(a=xz,b=negXz,sel=nx,out=Xn);
-Not16(in=yz,out=negYz);
-Mux16(a=yz,b=negYz,sel=ny,out=Yn);
-And16(a=Xn,b=Yn,out=XnANDYn);
-Add16(a=Xn,b=Yn,out=XnADDYn);
-Mux16(a=XnANDYn,b=XnADDYn,sel=f,out=F1);
-Not16(in=F1,out=notF1);
-Mux16(a=F1,b=notF1,sel=no,out=out,out[15]=Qng,out[0..7]=LO1, out[8..15]=HI1);
-Or8Way(in=LO1,out=Or1);
-Or8Way(in=HI1,out=Or2);
-Or(a=Or1,b=Or2,out=nzr);
-Not(in=nzr,out=zr);
-And(a=Qng, b=true, out=ng);
+
+	Mux16(a=x,b=false,sel=zx,out=xz);
+	Mux16(a=y,b=false,sel=zy,out=yz);
+	Not16(in=xz,out=negXz);
+	Mux16(a=xz,b=negXz,sel=nx,out=Xn);
+	Not16(in=yz,out=negYz);
+	Mux16(a=yz,b=negYz,sel=ny,out=Yn);
+	And16(a=Xn,b=Yn,out=XnANDYn);
+	Add16(a=Xn,b=Yn,out=XnADDYn);
+	Mux16(a=XnANDYn,b=XnADDYn,sel=f,out=F1);
+	Not16(in=F1,out=notF1);
+	Mux16(a=F1,b=notF1,sel=no,out=out,out[15]=Qng,out[0..7]=LO1, out[8..15]=HI1);
+	Or8Way(in=LO1,out=Or1);
+	Or8Way(in=HI1,out=Or2);
+	Or(a=Or1,b=Or2,out=nzr);
+	Not(in=nzr,out=zr);
+	And(a=Qng, b=true, out=ng);
 
 <h2>SEQUENTIAL LOGIC AND MEMORY</h2>
 
