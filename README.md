@@ -1,14 +1,9 @@
 # HwSim-LogicGates
 Logic gates for use with https://www.nand2tetris.org/ hardware simulator:
 
-<b>NOT</b><i>
-CHIP Not {
-    IN in;
-    OUT out;
-
+<b>NOT</b>
     PARTS:
-    Nand(a=in, b=in, out=out);
-}</i>
+    Nand(a=in, b=in, out=out);</i>
 
 <b>AND</b><i>
 CHIP And {
