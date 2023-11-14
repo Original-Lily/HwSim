@@ -169,62 +169,34 @@ Logic gates for use with https://www.nand2tetris.org/ hardware simulator:
     PARTS:
     Add8(a=in, b[0]=true, out=out);
 
-ALU
-CHIP ALU {
-IN
-x[16], y[16], // 16-bit inputs
-zx, // zero the x input?
-nx, // negate the x input?
-zy, // zero the y input?
-ny, // negate the y input?
-f, // compute out = x + y (if 1) or x & y (if 0)
-no; // negate the out output?
-OUT
-out[16], // 16-bit output
-zr, // 1 if (out == 0), 0 otherwise
-ng; // 1 if (out < 0), 0 otherwise
-PARTS:
-//x
+<b>ALU</b>
 Mux16(a=x,b=false,sel=zx,out=xz);
 Mux16(a=y,b=false,sel=zy,out=yz);
-//y
 Not16(in=xz,out=negXz);
 Mux16(a=xz,b=negXz,sel=nx,out=Xn);
 Not16(in=yz,out=negYz);
 Mux16(a=yz,b=negYz,sel=ny,out=Yn);
-//compute
 And16(a=Xn,b=Yn,out=XnANDYn);
 Add16(a=Xn,b=Yn,out=XnADDYn);
 Mux16(a=XnANDYn,b=XnADDYn,sel=f,out=F1);
-//post
 Not16(in=F1,out=notF1);
 Mux16(a=F1,b=notF1,sel=no,out=out,out[15]=Qng,out[0..7]=LO1, out[8..15]=HI1);
-//zr
 Or8Way(in=LO1,out=Or1);
 Or8Way(in=HI1,out=Or2);
 Or(a=Or1,b=Or2,out=nzr);
 Not(in=nzr,out=zr);
-//ng
 And(a=Qng, b=true, out=ng);
-}
 
+<h2>SEQUENTIAL LOGIC AND MEMORY</h2>
 
-SEQUENTIAL LOGIC AND MEMORY
-
-BIT
-CHIP Bit {
-    IN in, load;
-    OUT out;
+<b>BIT</b>
 
     PARTS:
     Mux(a=dffOut, b=in, sel=load, out=muxOut);
     DFF(in=muxOut, out=dffOut);
     Or(a=false, b=dffOut, out=out);
-}
-Register
-CHIP Register {
-    IN in[8], load;
-    OUT out[8];
+
+<b>Register</b>
 
     PARTS:
     Bit(in=in[0], load=load, out=out[0]);
@@ -235,11 +207,8 @@ CHIP Register {
     Bit(in=in[5], load=load, out=out[5]);
     Bit(in=in[6], load=load, out=out[6]);
     Bit(in=in[7], load=load, out=out[7]);
-}
-RAM8
-CHIP RAM8 {
-    IN in[8], load, address[3];
-    OUT out[8];
+
+<b>RAM8</b>
 
     PARTS:
     DMux8Way(in=load, sel=address,
@@ -273,11 +242,8 @@ CHIP RAM8 {
       h=r7,
       sel=address,
       out=out);
-}
-RAM64
-CHIP RAM64 {
-    IN in[8], load, address[6];
-    OUT out[8];
+
+<b>RAM64</b>
 
     PARTS:
     DMux8Way(in=load,sel=address[0..2],a=a,b=b,c=c,d=d,e=e,f=f,g=g,h=h);
@@ -290,11 +256,8 @@ CHIP RAM64 {
 	RAM8(in=in,load=g,address=address[3..5],out=out6);
 	RAM8(in=in,load=h,address=address[3..5],out=out7);
 	Mux8Way8(a=out0,b=out1,c=out2,d=out3,e=out4,f=out5,g=out6,h=out7,sel=address[0..2],out=out);
-}
-RAM512
-CHIP RAM512 {
-    IN in[8], load, address[9];
-    OUT out[8];
+
+<b>RAM512</b>
 
     PARTS:
 	DMux8Way(in=load,sel=address[6..8],a=a,b=b,c=c,d=d,e=e,f=f,g=g,h=h);
@@ -307,11 +270,8 @@ CHIP RAM512 {
 	RAM64(in=in,load=g,address=address[0..5],out=out6);
 	RAM64(in=in,load=h,address=address[0..5],out=out7);
 	Mux8Way8(a=out0,b=out1,c=out2,d=out3,e=out4,f=out5,g=out6,h=out7,sel=address[6..8],out=out);
-}
-RAM4K
-CHIP RAM4K {
-    IN in[8], load, address[12];
-    OUT out[8];
+
+<b>RAM4K</b>
 
     PARTS:
     DMux8Way(in=load,sel=address[9..11],a=a,b=b,c=c,d=d,e=e,f=f,g=g,h=h);
@@ -324,11 +284,8 @@ CHIP RAM4K {
 	RAM512(in=in,load=g,address=address[0..8],out=out6);
 	RAM512(in=in,load=h,address=address[0..8],out=out7);
 	Mux8Way8(a=out0,b=out1,c=out2,d=out3,e=out4,f=out5,g=out6,h=out7,sel=address[9..11],out=out);
-}
-RAM16K
-CHIP RAM16K {
-    IN in[8], load, address[14];
-    OUT out[8];
+
+<b>RAM16K</b>
 
     PARTS:
     DMux4Way(in=load,sel=address[12..13],a=a,b=b,c=c,d=d);
