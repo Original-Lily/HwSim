@@ -31,41 +31,29 @@ Logic gates for use with https://www.nand2tetris.org/ hardware simulator:
      Or(a=in[6], b=t5, out=t6);
      Or(a=in[7], b=t6, out=out);
 
-MUX
-CHIP Mux {
-    IN a, b, sel;
-    OUT out;
+<b>MUX</b>
 
     PARTS:
     Not(in=sel, out=notsel);
     And(a=notsel, b=a, out=ares);
     And(a=sel, b=b, out=bres);
     Or(a=ares, b=bres, out=out);
-}
-MUX4WAY8
-CHIP Mux4Way8 {
-    IN a[8], b[8], c[8], d[8], sel[2];
-    OUT out[8];
+
+<b>MUX4WAY8</b>
 
     PARTS:
     Mux8(a=a, b=b, sel=sel[0], out=outab);
     Mux8(a=c, b=d, sel=sel[0], out=outcd);
     Mux8(a=outab, b=outcd, sel=sel[1], out=out);
-}
-DMUX
-CHIP DMux {
-    IN in, sel;
-    OUT a, b;
+
+<b>DMUX</b>
 
     PARTS:
     Not(in=sel, out=notsel);
     And(a=notsel, b=in, out=a);
     And(a=sel, b=in, out=b);
-}
-DMUX8WAY
-CHIP DMux8Way {
-    IN in, sel[3];
-    OUT a, b, c, d, e, f, g, h;
+
+<b>DMUX8WAY</b>
 
     PARTS:
     DMux(in=in, sel=sel[2], a=abcd, b=efgh);
@@ -75,11 +63,8 @@ CHIP DMux8Way {
     DMux(in=cd, sel=sel[0], a=c, b=d);
     DMux(in=ef, sel=sel[0], a=e, b=f);
     DMux(in=gh, sel=sel[0], a=g, b=h);
-}
-NOT8
-CHIP Not8 {
-    IN in[8];
-    OUT out[8];
+
+<b>NOT8</b>
 
     PARTS:
 	Not(in=in[0], out=out[0]);
@@ -90,11 +75,8 @@ CHIP Not8 {
 	Not(in=in[5], out=out[5]);
 	Not(in=in[6], out=out[6]);
 	Not(in=in[7], out=out[7]);
-}
-AND8
-CHIP And8 {
-    IN a[8], b[8];
-    OUT out[8];
+
+<b>AND8</b>
 
     PARTS:
      And(a=a[0], b=b[0], out=out[0]);
@@ -105,11 +87,8 @@ CHIP And8 {
      And(a=a[5], b=b[5], out=out[5]);
      And(a=a[6], b=b[6], out=out[6]);
      And(a=a[7], b=b[7], out=out[7]);
-}
-OR8
-CHIP Or8 {
-    IN a[8], b[8];
-    OUT out[8];
+
+<b>OR8</b>
 
     PARTS:
      Or(a=a[0], b=b[0], out=out[0]);
@@ -120,11 +99,8 @@ CHIP Or8 {
      Or(a=a[5], b=b[5], out=out[5]);
      Or(a=a[6], b=b[6], out=out[6]);
      Or(a=a[7], b=b[7], out=out[7]);
-}
-XOR
-HIP Xor {
-    IN a, b;
-    OUT out;
+
+<b>XOR</b>
 
     PARTS:
     And(a=a, b=b, out=ab);
@@ -132,11 +108,8 @@ HIP Xor {
     Not(in=aorb, out=notaorb);
     Or(a=ab, b=notaorb, out=bla);
     Not(in=bla, out=out);
-}
-MUX8
-CHIP Mux8 {
-    IN a[8], b[8], sel;
-    OUT out[8];
+
+<b>MUX8</b>
 
     PARTS:
      Mux(a=a[0], b=b[0], sel=sel, out=out[0]);
@@ -147,13 +120,8 @@ CHIP Mux8 {
      Mux(a=a[5], b=b[5], sel=sel, out=out[5]);
      Mux(a=a[6], b=b[6], sel=sel, out=out[6]);
      Mux(a=a[7], b=b[7], sel=sel, out=out[7]);
-}
-MUX8WAY8
-CHIP Mux8Way8 {
-    IN a[8], b[8], c[8], d[8],
-       e[8], f[8], g[8], h[8],
-       sel[3];
-    OUT out[8];
+
+<b>MUX8WAY8</b>
 
     PARTS:
     Mux8(a=a, b=b, sel=sel[0], out=outab);
@@ -163,45 +131,28 @@ CHIP Mux8Way8 {
     Mux8(a=outab, b=outcd, sel=sel[1], out=outabcd);
     Mux8(a=outef, b=outgh, sel=sel[1], out=outefgh);
     Mux8(a=outabcd, b=outefgh, sel=sel[2], out=out);
-}
-DMUX4WAY
-CHIP DMux4Way {
-    IN in, sel[2];
-    OUT a, b, c, d;
+
+<b>DMUX4WAY</b>
 
     PARTS:
-	  DMux(in=in, sel=sel[1], a=outa, b=outb);
+    DMux(in=in, sel=sel[1], a=outa, b=outb);
     DMux(in=outa, sel=sel[0], a=a, b=b);
     DMux(in=outb, sel=sel[0], a=c, b=d);
-}
 
-ALU
-
-HALFADDER
-CHIP HalfAdder {
-    IN a, b;    // 1-bit inputs
-    OUT sum,    // Right bit of a + b 
-        carry;  // Left bit of a + b
+<b>ALU</b>
 
     PARTS:
     Xor(a=a, b=b, out=sum);
     And(a=a, b=b, out=carry);
-}
-FULLADDER
-CHIP FullAdder {
-    IN a, b, c;  // 1-bit inputs
-    OUT sum,     // Right bit of a + b + c
-        carry;   // Left bit of a + b + c
+
+<b>FULLADDER</b>
 
     PARTS:
     HalfAdder(a=a, b=b, sum=absum, carry=abcarry);
     HalfAdder(a=absum, b=c, sum=sum, carry=abccarry);   
     Or(a=abcarry, b=abccarry, out=carry);               
-}
-ADD8
-CHIP Add8 {
-    IN a[8], b[8];
-    OUT out[8];
+
+<b>ADD8</b>
 
     PARTS:
     HalfAdder(a=a[0],   b=b[0],   sum=out[0],           carry=c0);
@@ -212,15 +163,12 @@ CHIP Add8 {
     FullAdder(a=a[5],   b=b[5],   c=c4,   sum=out[5],   carry=c5);
     FullAdder(a=a[6],   b=b[6],   c=c5,   sum=out[6],   carry=c6);
     FullAdder(a=a[7],   b=b[7],   c=c6,   sum=out[7],   carry=c7);
-}
-INC8
-CHIP Inc8 {
-    IN in[8];
-    OUT out[8];
+
+<b>INC8</b>
 
     PARTS:
     Add8(a=in, b[0]=true, out=out);
-}
+
 ALU
 CHIP ALU {
 IN
