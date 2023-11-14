@@ -6,32 +6,21 @@ Logic gates for use with https://www.nand2tetris.org/ hardware simulator:
     PARTS:
     Nand(a=in, b=in, out=out);
 
-<b>AND</b><i>
-CHIP And {
-    IN a, b;
-    OUT out;
+<b>AND</b>
 
     PARTS:
     Nand(a=a, b=b, out=nandOut);
     Not(in=nandOut, out=out);
-}</i>
 
-<b>OR</b><i>
-CHIP Or {
-    IN a, b;
-    OUT out;
+<b>OR</b>
 
     PARTS:
     Not(in=a, out=nota);
     Not(in=b, out=notb);
     Nand(a=nota, b=notb, out=out);
-}</i>
 
 
-OR8WAY
-CHIP Or8Way {
-    IN in[8];
-    OUT out;
+<b>OR8WAY</b>
 
     PARTS:
      Or(a=in[0], b=in[1], out=t1);
@@ -41,7 +30,7 @@ CHIP Or8Way {
      Or(a=in[5], b=t4, out=t5);
      Or(a=in[6], b=t5, out=t6);
      Or(a=in[7], b=t6, out=out);
-}
+
 MUX
 CHIP Mux {
     IN a, b, sel;
