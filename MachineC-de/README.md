@@ -38,4 +38,6 @@ We need to terminate programs safely. To do this, we end with an infinite loop.
 
 <br>
 
-![image](https://github.com/Original-Lily/HwSim/assets/87139613/029bd3d6-bf84-4144-ba79-f1f804f63ebd)
+
+![Untitled(1)](https://github.com/Original-Lily/HwSim/assets/87139613/d89d48b3-a9b5-4193-92ef-ff5d29d50697)
+![Untitled](https://github.com/Original-Lily/HwSim/assets/87139613/0ba6adec-01a1-48fc-84cb-5ba16e2d0154)
