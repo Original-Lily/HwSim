@@ -14,7 +14,7 @@ D=M // D = RAM[0]
 D=D+M // D = D + RAM[1]
 @2
 M=D // RAM[2] = D
-</code>
+</code><br>
 
 <b>Terminating A Program</b>
 We need to terminate programs safely. To do this, we end with an infinite loop.
@@ -22,7 +22,7 @@ We need to terminate programs safely. To do this, we end with an infinite loop.
 <code>
 @6
 0;JMP 
-</code>
+</code><br>
 
 <b>Flip Values Of RAM[0] and RAM[1]</b>
 
