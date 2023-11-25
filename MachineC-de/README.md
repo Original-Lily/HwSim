@@ -4,6 +4,7 @@ HACK language code for use with https://www.nand2tetris.org/ CPU emulator:
 
 <b>Adding Two Numbers</b>
 
+<code>
   // Program: Add2.asm
   // Computes: RAM[2] = RAM[0] + RAM[1]
   // Usage: put values in RAM[0], RAM[1]
@@ -17,14 +18,19 @@ HACK language code for use with https://www.nand2tetris.org/ CPU emulator:
   @2
   M=D // RAM[2] = D
 
+</code>
+
 <b>Terminating A Program</b>
 We need to terminate programs safely. To do this, we end with an infinite loop.
 
+<code>
   @6
   0;JMP 
+</code>
 
 <b>Flip Values Of RAM[0] and RAM[1]</b>
 
+<code>
   // Program: Flip.asm
   // flips the values of
   // RAM[0] and RAM[1]
@@ -43,5 +49,6 @@ We need to terminate programs safely. To do this, we end with an infinite loop.
   (END)
   @END
   0;JMP
+</code>
 
 ![image](https://github.com/Original-Lily/HwSim/assets/87139613/029bd3d6-bf84-4144-ba79-f1f804f63ebd)
